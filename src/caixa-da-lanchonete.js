@@ -13,7 +13,22 @@ class CaixaDaLanchonete {
     }
 
     calcularValorDaCompra(metodoDePagamento, itens) {
-        return "";
+        let total = 0.0;
+
+        if (itens.length === 0) {
+            return "Não há itens no carrinho de compra!";
+        }
+
+        for(const itemInfo of itens){
+            const item = itemInfo.split(",");
+
+            if (item[0] in this.cardapio) {
+            } else {
+                return "Item inválido!";
+            }
+
+        }
+        return `R$ ${total.toFixed(2).replace(".", ",")}`;
     }
 
 }
