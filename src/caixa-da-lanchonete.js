@@ -22,6 +22,10 @@ class CaixaDaLanchonete {
         for(const itemInfo of itens){
             const item = itemInfo.split(",");
 
+            if(item[1] <= 0){
+                return "Quantidade inválida!";
+            }
+
             if (item[0] in this.cardapio) {
                 const valorItem = this.cardapio[item[0]].valor;
                 total += valorItem * item[1];
@@ -34,6 +38,8 @@ class CaixaDaLanchonete {
             total = total * 0.95;
         } else if(metodoDePagamento === "credito"){
             total = total * 1.03;
+        } else if(metodoDePagamento !== "debito"){
+            return "Forma de pagamento inválida!";
         }
 
         return `R$ ${total.toFixed(2).replace(".", ",")}`;
