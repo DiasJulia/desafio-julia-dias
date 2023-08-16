@@ -23,11 +23,19 @@ class CaixaDaLanchonete {
             const item = itemInfo.split(",");
 
             if (item[0] in this.cardapio) {
+                const valorItem = this.cardapio[item[0]].valor;
+                total += valorItem * item[1];
             } else {
                 return "Item inválido!";
             }
-
         }
+
+        if(metodoDePagamento === "dinheiro"){
+            total = total * 0.95;
+        } else if(metodoDePagamento === "credito"){
+            total = total * 1.03;
+        }
+
         return `R$ ${total.toFixed(2).replace(".", ",")}`;
     }
 
