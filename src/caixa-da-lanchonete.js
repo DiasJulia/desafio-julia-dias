@@ -19,6 +19,9 @@ class CaixaDaLanchonete {
             return "Não há itens no carrinho de compra!";
         }
 
+        const hasCafe = itens.some(item => item.includes("cafe"));
+        const hasSanduiche = itens.some(item => item.includes("sanduiche"));
+
         for(const itemInfo of itens){
             const item = itemInfo.split(",");
 
@@ -28,6 +31,15 @@ class CaixaDaLanchonete {
 
             if (item[0] in this.cardapio) {
                 const valorItem = this.cardapio[item[0]].valor;
+
+                if(item[0] === "chantily" && !hasCafe){
+                    return "Item extra não pode ser pedido sem o principal";
+                }
+
+                if(item[0] === "queijo" && !hasSanduiche){
+                    return "Item extra não pode ser pedido sem o principal";
+                }
+
                 total += valorItem * item[1];
             } else {
                 return "Item inválido!";
